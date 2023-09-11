@@ -110,6 +110,10 @@ impl DistRegionRequestHandler {
                 feat: "region compact",
             }
             .fail(),
+            region_request::Body::Truncate(_) => NotSupportedSnafu {
+                feat: "region truncate",
+            }
+            .fail(),
         }
     }
 

@@ -498,6 +498,9 @@ impl<S: LogStore> RegionWorkerLoop<S> {
                     self.handle_compaction_request(ddl.region_id, ddl.sender);
                     continue;
                 }
+                DdlRequest::Truncate(_) => {
+                    todo!()
+                }
             };
 
             if let Some(sender) = ddl.sender {

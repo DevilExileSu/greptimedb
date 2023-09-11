@@ -34,6 +34,7 @@ pub enum RegionRequest {
     Alter(RegionAlterRequest),
     Flush(RegionFlushRequest),
     Compact(RegionCompactRequest),
+    Truncate(RegionTruncateRequest),
 }
 
 impl RegionRequest {
@@ -130,6 +131,10 @@ impl RegionRequest {
                 compact.region_id.into(),
                 Self::Compact(RegionCompactRequest {}),
             )]),
+            region_request::Body::Truncate(truncate) => Ok(vec![(
+                truncate.region_id.into(),
+                Self::Truncate(RegionTruncateRequest {}),
+            )]),
         }
     }
 }
@@ -199,3 +204,6 @@ pub struct RegionFlushRequest {}
 
 #[derive(Debug)]
 pub struct RegionCompactRequest {}
+
+#[derive(Debug)]
+pub struct RegionTruncateRequest {}
